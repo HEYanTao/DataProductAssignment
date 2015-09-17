@@ -19,9 +19,16 @@ shinyServer(
                   else{
                         qplot(get(input$choice),carnames,data=data,xlab="",ylab="")
                         }
-                  })     
                   })
-# plot(data[,1],rep(1,32),type="p",col="white",xlab="",ylab="",main="Distinguish AT and MT")
-# points(data[data$am==1,1],data[data$am==1,I(as.numeric(as.character(input$choice)))],type="p",col="blue")
-# points(data[data$am==0,1],data[data$am==0,I(as.numeric(as.character(input$choice)))],type="p",col="red")
-# legend("topleft",pch=1,col=c("blue","red"),legend=c("MT cars","AT cars"))
+            output$mean<-renderPrint({
+                  attach(data)
+                  if(input$check=="y"){
+                         m1<-tapply(get(input$choice),data$am,mean)
+                         paste0(" AT cars' mean:",m1[1],"; MT cars' mean:",m1[2])
+                  }
+                  else{
+                        m1<-mean(get(input$choice))
+                        paste0(" All cars' mean:",m1)
+                  }
+            })
+                  })

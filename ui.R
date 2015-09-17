@@ -19,7 +19,9 @@ shinyUI(
             ),
       mainPanel(
             h3('Plot is here:'),
-            plotOutput("pic")
+            plotOutput("pic"),
+            h3('Numeric result is here:'),
+            verbatimTextOutput("mean")
             )),
       tabPanel("About",
                mainPanel(
